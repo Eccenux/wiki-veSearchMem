@@ -1,11 +1,11 @@
 ﻿// ==UserScript==
 // @name         Wiki VE Search Mem
 // @namespace    pl.enux.wiki
-// @version      0.0.1
-// @description  [0.0.1] Pomocnik do wyszukiwania wybranych fraz. Frazy są w `sequences`.
+// @version      0.1.0
+// @description  [0.1.0] Pomocnik do wyszukiwania wybranych fraz. Frazy są w `sequences`.
 // @author       Nux
 // @match        https://pl.wikipedia.org/*
-// @grant        none
+// @grant        GM_addStyle
 // @updateURL    https://github.com/Eccenux/wiki-veSearchMem/raw/master/veSearchMem.meta.js
 // @downloadURL  https://github.com/Eccenux/wiki-veSearchMem/raw/master/veSearchMem.user.js
 // ==/UserScript==
@@ -25,6 +25,42 @@ const options = {
 	findQuery : '[placeholder="Znajdź"]',
 	replaceQuery : '[placeholder="Zamień"]',
 };
+
+const cssText = `
+.edit-search-mem button {
+	background: rgb(248, 249, 250);
+	color: #333;
+	border: 1px solid gray;
+	border-collapse: collapse;
+	padding: .2em .5em;
+	border-radius: 4px;
+}
+
+.edit-search-mem button:first-child {
+	border-right-style: none;
+	border-top-right-radius: unset;
+	border-bottom-right-radius: unset;
+}
+.edit-search-mem button:last-child {
+	border-top-left-radius: unset;
+	border-bottom-left-radius: unset;
+}
+
+.edit-search-mem button:hover {
+	background: white;
+}
+.edit-search-mem button:active {
+	background-color: #c8ccd1;
+	color: #000;
+	border-color: #72777d;
+}
+.edit-search-mem button:focus {
+    border-color: #36c;
+    box-shadow: inset 0 0 0 1px #36c;
+    outline: 1px solid transparent;
+}
+`;
+GM_addStyle(cssText);
 
 class SequenceMem {
 	constructor() {
